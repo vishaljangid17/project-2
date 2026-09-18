@@ -1,13 +1,4 @@
-// ==================================================
-// DOTENV
-// ==================================================
-
 require("dotenv").config();
-
-
-// ==================================================
-// IMPORTS
-// ==================================================
 
 const express = require("express");
 const app = express();
@@ -33,135 +24,63 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
 
-// ==================================================
-// MONGODB URL
-// ==================================================
-
-// Local MongoDB
-// const dbUrl = "mongodb://127.0.0.1:27017/wanderlust";
-
 // MongoDB Atlas
 const dbUrl = process.env.ATLASDB_URL;
 
 
-// ==================================================
-// MONGODB CONNECTION
-// ==================================================
-
+// MongoDB connection
 async function main() {
-
     await mongoose.connect(dbUrl);
-
     console.log("Connected to DB");
-
 }
 
 main().catch((err) => {
-
-    console.log(
-        "MongoDB connection error:",
-        err
-    );
-
+    console.log("MongoDB connection error:", err);
 });
 
 
-// ==================================================
-// EJS SETUP
-// ==================================================
-
-app.engine(
-    "ejs",
-    ejsMate
-);
-
-app.set(
-    "view engine",
-    "ejs"
-);
-
-app.set(
-    "views",
-    path.join(__dirname, "views")
-);
+// EJS setup
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 
-// ==================================================
-// BODY PARSER MIDDLEWARE
-// ==================================================
-
-app.use(
-    express.urlencoded({
-        extended: true
-    })
-);
-
-app.use(
-    express.json()
-);
+// Body parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
-// ==================================================
-// METHOD OVERRIDE
-// ==================================================
-
-app.use(
-    methodOverride("_method")
-);
+// Method override
+app.use(methodOverride("_method"));
 
 
-// ==================================================
-// STATIC FILES
-// ==================================================
-
-app.use(
-    express.static(
-        path.join(__dirname, "public")
-    )
-);
+// Static files
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
     "/uploads",
-    express.static(
-        path.join(__dirname, "uploads")
-    )
+    express.static(path.join(__dirname, "uploads"))
 );
 
 
-// ==================================================
-// MONGO SESSION STORE
-// ==================================================
-
+// MongoDB session store
 const store = MongoStore.create({
-
     mongoUrl: dbUrl,
 
     crypto: {
-        secret: process.env.SECRET,
+        secret: process.env.SECRET
     },
 
     touchAfter: 24 * 3600
-
 });
 
-
-// MongoDB session store error
 store.on("error", (err) => {
-
-    console.log(
-        "ERROR IN MONGO SESSION STORE",
-        err
-    );
-
+    console.log("ERROR IN MONGO SESSION STORE", err);
 });
 
 
-// ==================================================
-// SESSION
-// ==================================================
-
+// Session
 const sessionOptions = {
-
     store,
 
     secret: process.env.SECRET,
@@ -171,63 +90,30 @@ const sessionOptions = {
     saveUninitialized: false,
 
     cookie: {
-
         expires: new Date(
-            Date.now() +
-            7 * 24 * 60 * 60 * 1000
+            Date.now() + 7 * 24 * 60 * 60 * 1000
         ),
 
-        maxAge:
-            7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
 
         httpOnly: true
-
     }
-
 };
 
-
-app.use(
-    session(sessionOptions)
-);
+app.use(session(sessionOptions));
 
 
-// ==================================================
-// FLASH
-// ==================================================
-
-app.use(
-    flash()
-);
+// Flash messages
+app.use(flash());
 
 
-// ==================================================
-// PASSPORT INITIALIZATION
-// ==================================================
-
-app.use(
-    passport.initialize()
-);
-
-app.use(
-    passport.session()
-);
-
-
-// ==================================================
-// PASSPORT LOCAL STRATEGY
-// ==================================================
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.use(
-    new LocalStrategy(
-        User.authenticate()
-    )
+    new LocalStrategy(User.authenticate())
 );
-
-
-// ==================================================
-// PASSPORT SERIALIZE / DESERIALIZE
-// ==================================================
 
 passport.serializeUser(
     User.serializeUser()
@@ -238,143 +124,78 @@ passport.deserializeUser(
 );
 
 
-// ==================================================
-// GLOBAL VARIABLES
-// ==================================================
+// Global variables
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user || null;
 
-app.use(
-    (req, res, next) => {
+    res.locals.success = req.flash("success");
 
-        // Current logged-in user
-        res.locals.currentUser =
-            req.user || null;
+    res.locals.error = req.flash("error");
 
+    res.locals.mapToken = process.env.MAP_TOKEN;
 
-        // Success flash messages
-        res.locals.success =
-            req.flash("success");
+    next();
+});
 
 
-        // Error flash messages
-        res.locals.error =
-            req.flash("error");
+// Home route
+app.get("/", (req, res) => {
+    res.redirect("/listings");
+});
 
 
-        // Mapbox token
-        res.locals.mapToken =
-            process.env.MAP_TOKEN;
-
-
-        next();
-
-    }
-);
-
-
-// ==================================================
-// HOME ROUTE
-// ==================================================
-
-// app.get(
-//     "/",
-//     (req, res) => {
-//         res.send("Hi, I am root");
-//     }
-// );
-
-
-// ==================================================
-// LISTING ROUTES
-// ==================================================
-
+// Listing routes
 app.use(
     "/listings",
     listingRouter
 );
 
 
-// ==================================================
-// REVIEW ROUTES
-// ==================================================
-
+// Review routes
 app.use(
     "/listings/:id/reviews",
     reviewRouter
 );
 
 
-// ==================================================
-// USER ROUTES
-// ==================================================
-
+// User routes
 app.use(
     "/",
     userRouter
 );
 
 
-// ==================================================
-// 404 ERROR
-// ==================================================
-
-app.all(
-    "/{*splat}",
-    (req, res, next) => {
-
-        next(
-            new ExpressError(
-                404,
-                "Page not found"
-            )
-        );
-
-    }
-);
+// 404 error
+app.all("/{*splat}", (req, res, next) => {
+    next(
+        new ExpressError(
+            404,
+            "Page not found"
+        )
+    );
+});
 
 
-// ==================================================
-// ERROR HANDLING
-// ==================================================
+// Error handling
+app.use((err, req, res, next) => {
+    const {
+        statusCode = 500,
+        message = "Something went wrong"
+    } = err;
 
-app.use(
-    (err, req, res, next) => {
+    console.log("❌ ERROR:", err);
 
-        const {
-            statusCode = 500,
-            message = "Something went wrong"
-        } = err;
-
-
-        console.log(
-            "❌ ERROR:",
-            err
-        );
+    res
+        .status(statusCode)
+        .render("error.ejs", {
+            message
+        });
+});
 
 
-        res
-            .status(statusCode)
-            .render(
-                "error.ejs",
-                {
-                    message
-                }
-            );
+// Server
+const PORT = process.env.PORT || 8080;
 
-    }
-);
-
-
-// ==================================================
-// SERVER
-// ==================================================
-
-app.listen(
-    8080,
-    () => {
-
-        console.log(
-            "Server is listening on port 8080"
-        );
-
-    }
-);
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
+});
