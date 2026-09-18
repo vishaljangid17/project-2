@@ -15,27 +15,17 @@ const waitForNominatim = async () => {
 
     const minimumDelay = 1100;
 
-    if (
-        timeSinceLastRequest <
-        minimumDelay
-    ) {
+    if (timeSinceLastRequest < minimumDelay) {
 
         const waitTime =
-            minimumDelay -
-            timeSinceLastRequest;
+            minimumDelay - timeSinceLastRequest;
 
-        await new Promise(
-            (resolve) => {
-                setTimeout(
-                    resolve,
-                    waitTime
-                );
-            }
-        );
+        await new Promise((resolve) => {
+            setTimeout(resolve, waitTime);
+        });
     }
 
-    lastGeocodeRequestTime =
-        Date.now();
+    lastGeocodeRequestTime = Date.now();
 };
 
 // Geocoding helper
@@ -44,18 +34,13 @@ const geocodeLocation = async (
     country
 ) => {
 
-    // Validate location
-    if (
-        !location ||
-        !country
-    ) {
+    if (!location || !country) {
 
         throw new Error(
             "Location and country are required."
         );
     }
 
-    // Search text
     const searchText =
         `${location}, ${country}`;
 
@@ -65,9 +50,7 @@ const geocodeLocation = async (
             .toLowerCase();
 
     // Check cache
-    if (
-        geocodeCache.has(cacheKey)
-    ) {
+    if (geocodeCache.has(cacheKey)) {
 
         const cachedCoordinates =
             geocodeCache.get(cacheKey);
@@ -224,6 +207,19 @@ module.exports.index = async (
             .sort({
                 _id: -1
             });
+
+    console.log(
+        "================================"
+    );
+
+    console.log(
+        "LISTINGS FOUND:",
+        allListings.length
+    );
+
+    console.log(
+        "================================"
+    );
 
     res.render(
         "listings/index.ejs",
@@ -540,7 +536,6 @@ module.exports.destroyListing =
             "Listing Deleted!"
         );
 
-        // Redirect
         res.redirect(
             "/listings"
         );
