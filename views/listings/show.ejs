@@ -1,0 +1,819 @@
+<% layout("/layouts/boilerplate") -%>
+
+<!-- ==================================================
+     LISTING SHOW PAGE
+================================================== -->
+
+<div class="container mt-4 listing-show-page">
+
+    <!-- ==================================================
+         LISTING HEADER
+    ================================================== -->
+
+    <div class="listing-header text-center mb-4">
+
+        <h1 class="listing-title">
+            <%= listing.title %>
+        </h1>
+
+        <p class="text-muted mb-0">
+            <i class="fa-solid fa-location-dot"></i>
+            <%= listing.location %>, <%= listing.country %>
+        </p>
+
+    </div>
+
+
+    <!-- ==================================================
+         LISTING IMAGE
+    ================================================== -->
+
+    <div class="listing-image-wrapper">
+
+        <img
+            src="<%= listing.image.url %>"
+            class="listing-show-image"
+            alt="<%= listing.title %>"
+        >
+
+    </div>
+
+
+    <!-- ==================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <div class="listing-details-layout">
+
+        <!-- ==================================================
+             ABOUT THIS PLACE
+        ================================================== -->
+
+        <section class="listing-about-section">
+
+            <div class="listing-info">
+
+                <h3 class="listing-info-title">
+                    <%= listing.title %>
+                </h3>
+
+                <p class="text-muted hosted-by">
+                    Hosted by
+
+                    <% if (listing.owner) { %>
+
+                        <strong>
+                            <%= listing.owner.username %>
+                        </strong>
+
+                    <% } else { %>
+
+                        <strong>
+                            Wanderlust Host
+                        </strong>
+
+                    <% } %>
+
+                </p>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="listing-description">
+
+                <h2>
+                    About this place
+                </h2>
+
+                <p>
+                    <%= listing.description %>
+                </p>
+
+            </div>
+
+
+            <div class="listing-price">
+
+                <h4>
+
+                    ₹<%= listing.price.toLocaleString("en-IN") %>
+
+                    <span class="text-muted fs-6">
+                        / night
+                    </span>
+
+                </h4>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             RESERVE CARD
+        ================================================== -->
+
+        <section class="booking-section">
+
+            <div class="listing-booking-card">
+
+                <h4 class="booking-card-price">
+
+                    ₹<%= listing.price.toLocaleString("en-IN") %>
+
+                    <span class="text-muted fs-6">
+                        / night
+                    </span>
+
+                </h4>
+
+
+                <div class="row g-2 mb-3">
+
+                    <div class="col-6">
+
+                        <label
+                            class="form-label"
+                            for="checkIn"
+                        >
+                            Check-in
+                        </label>
+
+                        <input
+                            type="date"
+                            id="checkIn"
+                            class="form-control"
+                        >
+
+                    </div>
+
+
+                    <div class="col-6">
+
+                        <label
+                            class="form-label"
+                            for="checkOut"
+                        >
+                            Check-out
+                        </label>
+
+                        <input
+                            type="date"
+                            id="checkOut"
+                            class="form-control"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label
+                        class="form-label"
+                        for="guests"
+                    >
+                        Guests
+                    </label>
+
+                    <select
+                        id="guests"
+                        class="form-select"
+                    >
+
+                        <option>
+                            1 guest
+                        </option>
+
+                        <option>
+                            2 guests
+                        </option>
+
+                        <option>
+                            3 guests
+                        </option>
+
+                        <option>
+                            4 guests
+                        </option>
+
+                        <option>
+                            5 guests
+                        </option>
+
+                        <option>
+                            6 guests
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger reserve-btn w-100 mb-3"
+                >
+                    Reserve
+                </button>
+
+
+                <p class="text-center text-muted small mb-0">
+                    You won't be charged yet
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ==================================================
+         OWNER ACTIONS
+    ================================================== -->
+
+    <% if (
+        currentUser &&
+        listing.owner &&
+        listing.owner._id &&
+        currentUser._id &&
+        listing.owner._id.equals(currentUser._id)
+    ) { %>
+
+        <section class="owner-actions-section">
+
+            <div class="owner-actions">
+
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="/listings/<%= listing._id %>/edit"
+                        class="btn btn-dark flex-fill"
+                    >
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
+                        Edit
+
+                    </a>
+
+
+                    <form
+                        action="/listings/<%= listing._id %>?_method=DELETE"
+                        method="POST"
+                        class="flex-fill"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn btn-outline-danger w-100"
+                        >
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Delete
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    <% } %>
+
+
+    <!-- ==================================================
+         WHERE YOU'LL BE
+    ================================================== -->
+
+    <section class="listing-map-section">
+
+        <h2>
+            Where you'll be
+        </h2>
+
+
+        <% if (
+            listing.geometry &&
+            Array.isArray(listing.geometry.coordinates) &&
+            listing.geometry.coordinates.length === 2
+        ) { %>
+
+            <div
+                id="map"
+                data-coordinates='<%= JSON.stringify(listing.geometry.coordinates) %>'
+                data-title="<%= listing.title %>"
+                data-location="<%= listing.location %>, <%= listing.country %>"
+            ></div>
+
+        <% } else { %>
+
+            <div class="alert alert-secondary">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                Location is not available for this listing.
+
+            </div>
+
+        <% } %>
+
+    </section>
+
+
+    <!-- ==================================================
+         GUEST REVIEWS
+    ================================================== -->
+
+    <section class="reviews-section">
+
+        <h2>
+            Guest Reviews
+        </h2>
+
+
+        <% if (listing.reviews && listing.reviews.length > 0) { %>
+
+            <div class="row g-3">
+
+                <% listing.reviews.forEach((review) => { %>
+
+                    <div class="col-md-6">
+
+                        <div class="review-card p-3">
+
+                            <!-- REVIEW AUTHOR -->
+
+                            <div class="d-flex align-items-center mb-2">
+
+                                <div class="review-avatar">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </div>
+
+
+                                <div class="ms-2">
+
+                                    <strong>
+
+                                        <% if (review.author) { %>
+
+                                            <%= review.author.username %>
+
+                                        <% } else { %>
+
+                                            Guest
+
+                                        <% } %>
+
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- STAR RATING -->
+
+                            <div class="review-rating mb-2">
+
+                                <% for (let i = 1; i <= 5; i++) { %>
+
+                                    <% if (i <= review.rating) { %>
+
+                                        <i class="fa-solid fa-star"></i>
+
+                                    <% } else { %>
+
+                                        <i class="fa-regular fa-star"></i>
+
+                                    <% } %>
+
+                                <% } %>
+
+                            </div>
+
+
+                            <!-- COMMENT -->
+
+                            <p class="review-comment mb-0">
+                                <%= review.comment %>
+                            </p>
+
+
+                            <!-- DELETE REVIEW -->
+
+                            <% if (
+                                currentUser &&
+                                review.author &&
+                                review.author._id &&
+                                currentUser._id &&
+                                review.author._id.equals(currentUser._id)
+                            ) { %>
+
+                                <form
+                                    action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                    method="POST"
+                                    class="mt-3"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-outline-danger"
+                                    >
+
+                                        <i class="fa-solid fa-trash"></i>
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } else { %>
+
+            <div class="empty-reviews">
+
+                <p class="text-muted">
+                    No reviews yet. Be the first to review this place.
+                </p>
+
+            </div>
+
+        <% } %>
+
+    </section>
+
+
+    <!-- ==================================================
+         LIVE REVIEWS
+    ================================================== -->
+
+    <% if (currentUser) { %>
+
+        <section class="review-form-section">
+
+            <h2>
+                Live Reviews
+            </h2>
+
+
+            <form
+                action="/listings/<%= listing._id %>/reviews"
+                method="POST"
+                novalidate
+                class="needs-validation"
+            >
+
+                <!-- ==================================================
+                     RATING
+                ================================================== -->
+
+                <div class="mb-3">
+
+                    <label class="form-label d-block">
+                        Rating
+                    </label>
+
+
+                    <div
+                        class="interactive-stars"
+                        id="interactiveStars"
+                    >
+
+                        <% for (let i = 1; i <= 5; i++) { %>
+
+                            <input
+                                type="radio"
+                                name="review[rating]"
+                                id="rating-<%= i %>"
+                                value="<%= i %>"
+                                <%= i === 1 ? "required" : "" %>
+                            >
+
+                            <label
+                                for="rating-<%= i %>"
+                                data-rating="<%= i %>"
+                                title="<%= i %> Star<%= i > 1 ? 's' : '' %>"
+                            >
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        <% } %>
+
+                    </div>
+
+
+                    <div
+                        class="rating-text"
+                        id="ratingText"
+                    >
+                        Select a rating
+                    </div>
+
+
+                    <div class="invalid-feedback">
+                        Please select a rating.
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     COMMENT
+                ================================================== -->
+
+                <div class="mb-3">
+
+                    <label
+                        for="comment"
+                        class="form-label"
+                    >
+                        Comment
+                    </label>
+
+
+                    <textarea
+                        id="comment"
+                        name="review[comment]"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Share your experience..."
+                        required
+                    ></textarea>
+
+
+                    <div class="invalid-feedback">
+                        Please write a comment.
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================================
+                     SUBMIT
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="btn btn-danger"
+                >
+                    Submit Review
+                </button>
+
+            </form>
+
+        </section>
+
+    <% } %>
+
+</div>
+
+
+<!-- ==================================================
+     INTERACTIVE RATING JAVASCRIPT
+================================================== -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const starsContainer =
+        document.getElementById("interactiveStars");
+
+    const ratingText =
+        document.getElementById("ratingText");
+
+    if (!starsContainer || !ratingText) {
+        return;
+    }
+
+    const stars =
+        starsContainer.querySelectorAll("label");
+
+    const radios =
+        starsContainer.querySelectorAll(
+            'input[name="review[rating]"]'
+        );
+
+
+    const ratingMessages = {
+        1: "Poor",
+        2: "Fair",
+        3: "Good",
+        4: "Very Good",
+        5: "Excellent"
+    };
+
+
+    /* ==================================================
+       UPDATE STARS
+    ================================================== */
+
+    function updateStars(rating, blink = false) {
+
+        // Remove all previous classes
+        stars.forEach(function (star) {
+
+            star.classList.remove("active");
+            star.classList.remove("hover");
+            star.classList.remove("star-selected");
+            star.classList.remove("star-blink");
+
+        });
+
+
+        // Add selected state
+        stars.forEach(function (star, index) {
+
+            if (index < rating) {
+
+                star.classList.add("star-selected");
+
+            }
+
+        });
+
+
+        // Blink only selected stars
+        if (blink && rating > 0) {
+
+            stars.forEach(function (star, index) {
+
+                if (index < rating) {
+
+                    // Force animation restart
+                    void star.offsetWidth;
+
+                    star.classList.add("star-blink");
+
+                }
+
+            });
+
+        }
+
+
+        // Update rating text
+        if (rating > 0) {
+
+            ratingText.textContent =
+                rating +
+                " Star" +
+                (rating > 1 ? "s" : "") +
+                " — " +
+                ratingMessages[rating];
+
+        } else {
+
+            ratingText.textContent =
+                "Select a rating";
+
+        }
+
+    }
+
+
+    /* ==================================================
+       CLICK / SELECT RATING
+    ================================================== */
+
+    radios.forEach(function (radio) {
+
+        radio.addEventListener("change", function () {
+
+            const rating =
+                Number(this.value);
+
+            updateStars(rating, true);
+
+        });
+
+    });
+
+
+    /* ==================================================
+       HOVER PREVIEW
+    ================================================== */
+
+    stars.forEach(function (star) {
+
+        star.addEventListener(
+            "mouseenter",
+            function () {
+
+                const rating =
+                    Number(this.dataset.rating);
+
+
+                stars.forEach(function (item, index) {
+
+                    // Remove old hover
+                    item.classList.remove("hover");
+
+
+                    if (index < rating) {
+
+                        item.classList.add("hover");
+
+                    }
+
+                });
+
+
+                // Show hover text
+                ratingText.textContent =
+                    rating +
+                    " Star" +
+                    (rating > 1 ? "s" : "") +
+                    " — " +
+                    ratingMessages[rating];
+
+            }
+        );
+
+    });
+
+
+    /* ==================================================
+       MOUSE LEAVE
+    ================================================== */
+
+    starsContainer.addEventListener(
+        "mouseleave",
+        function () {
+
+            stars.forEach(function (star) {
+
+                star.classList.remove("hover");
+
+            });
+
+
+            const selected =
+                starsContainer.querySelector(
+                    'input[name="review[rating]"]:checked'
+                );
+
+
+            if (selected) {
+
+                updateStars(
+                    Number(selected.value),
+                    false
+                );
+
+            } else {
+
+                updateStars(0, false);
+
+            }
+
+        }
+    );
+
+
+    /* ==================================================
+       INITIAL STATE
+    ================================================== */
+
+    const initiallySelected =
+        starsContainer.querySelector(
+            'input[name="review[rating]"]:checked'
+        );
+
+
+    if (initiallySelected) {
+
+        updateStars(
+            Number(initiallySelected.value),
+            false
+        );
+
+    } else {
+
+        updateStars(0, false);
+
+    }
+
+});
+</script>

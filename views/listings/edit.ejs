@@ -1,0 +1,199 @@
+<% layout("/layouts/boilerplate") -%>
+
+<div class="edit-listing-page">
+
+    <div class="edit-listing-container">
+
+        <h3 class="edit-listing-title">Edit your Listing</h3>
+
+        <form
+            method="POST"
+            action="/listings/<%= listing._id %>?_method=PUT"
+            novalidate
+            class="needs-validation edit-listing-form"
+            enctype="multipart/form-data"
+        >
+
+            <!-- TITLE -->
+            <div class="edit-form-group">
+                <label for="title" class="form-label">
+                    Title
+                </label>
+
+                <input
+                    id="title"
+                    name="listing[title]"
+                    value="<%= listing.title %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="valid-feedback">
+                    Title looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a title.
+                </div>
+            </div>
+
+
+            <!-- DESCRIPTION -->
+            <div class="edit-form-group">
+                <label for="description" class="form-label">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="listing[description]"
+                    class="form-control edit-description"
+                    required
+                ><%= listing.description %></textarea>
+
+                <div class="valid-feedback">
+                    Description looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a description.
+                </div>
+            </div>
+
+
+            <!-- CURRENT IMAGE -->
+            <div class="edit-form-group">
+
+                <label class="form-label">
+                    Current Image
+                </label>
+
+                <div class="current-image-wrapper">
+                    <img
+                        src="<%= listing.image.url %>"
+                        alt="Current listing image"
+                        class="current-listing-image"
+                    >
+                </div>
+
+            </div>
+
+
+            <!-- NEW IMAGE -->
+            <div class="edit-form-group">
+
+                <label for="image" class="form-label">
+                    Upload New Image
+                </label>
+
+                <input
+                    id="image"
+                    name="listing[image][url]"
+                    type="file"
+                    class="form-control"
+                    accept="image/*"
+                >
+
+                <small class="edit-help-text">
+                    Leave empty if you don't want to change the image.
+                </small>
+
+            </div>
+
+
+            <!-- PRICE -->
+            <div class="edit-form-group">
+
+                <label for="price" class="form-label">
+                    Price
+                </label>
+
+                <input
+                    id="price"
+                    name="listing[price]"
+                    value="<%= listing.price %>"
+                    type="number"
+                    class="form-control"
+                    required
+                    min="1"
+                >
+
+                <div class="valid-feedback">
+                    Price looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a valid price.
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+            <div class="edit-form-group">
+
+                <label for="location" class="form-label">
+                    Location
+                </label>
+
+                <input
+                    id="location"
+                    name="listing[location]"
+                    value="<%= listing.location %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="valid-feedback">
+                    Location looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a location.
+                </div>
+
+            </div>
+
+
+            <!-- COUNTRY -->
+            <div class="edit-form-group">
+
+                <label for="country" class="form-label">
+                    Country
+                </label>
+
+                <input
+                    id="country"
+                    name="listing[country]"
+                    value="<%= listing.country %>"
+                    type="text"
+                    class="form-control"
+                    required
+                >
+
+                <div class="valid-feedback">
+                    Country looks good!
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a country.
+                </div>
+
+            </div>
+
+
+            <!-- BUTTON -->
+            <button
+                type="submit"
+                class="btn btn-dark edit-listing-btn"
+            >
+                Edit
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

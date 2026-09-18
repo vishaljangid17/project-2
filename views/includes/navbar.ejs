@@ -1,0 +1,153 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+
+    <div class="container-fluid navbar-container">
+
+        <!-- =========================
+             LEFT SECTION
+             LOGO + ALL
+        ========================== -->
+
+        <div class="navbar-left">
+
+            <!-- LOGO -->
+            <a class="navbar-brand navbar-logo" href="/listings">
+                <i class="fa-solid fa-compass"></i>
+            </a>
+
+            <!-- ALL -->
+            <a
+                class="nav-link category-link active-category"
+                href="/listings"
+            >
+                <i class="fa-solid fa-globe nav-icon all-icon"></i>
+                <span>All</span>
+            </a>
+
+        </div>
+
+
+        <!-- MOBILE TOGGLE -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <!-- =========================
+             NAVBAR CONTENT
+        ========================== -->
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+
+            <!-- =========================
+                 CENTER
+            ========================== -->
+
+            <div class="navbar-nav categories-nav">
+
+                <!-- HOMES -->
+
+                <a
+                    class="nav-link category-link"
+                    href="/listings?category=homes"
+                >
+                    <i class="fa-solid fa-house nav-icon homes-icon"></i>
+                    <span>Homes</span>
+                </a>
+
+
+                <!-- EXPERIENCES -->
+
+                <a
+                    class="nav-link category-link"
+                    href="/listings?category=experiences"
+                >
+                    <i class="fa-solid fa-star nav-icon experiences-icon"></i>
+                    <span>Experiences</span>
+                </a>
+
+
+                <!-- SERVICES -->
+
+                <a
+                    class="nav-link category-link"
+                    href="/listings?category=services"
+                >
+                    <i class="fa-solid fa-bell-concierge nav-icon services-icon"></i>
+                    <span>Services</span>
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 RIGHT
+            ========================== -->
+
+            <div class="navbar-nav right-nav">
+
+                <!-- BECOME HOST -->
+
+                <a
+                    class="nav-link category-link"
+                    href="/listings/new"
+                >
+                    <i class="fa-solid fa-house nav-icon host-icon"></i>
+                    <span>Become a host</span>
+                </a>
+
+
+                <% if (!currentUser) { %>
+
+                    <!-- SIGN UP -->
+
+                    <a
+                        class="nav-link category-link"
+                        href="/signup"
+                    >
+                        <i class="fa-solid fa-user-plus nav-icon signup-icon"></i>
+                        <span>Sign up</span>
+                    </a>
+
+
+                    <!-- LOG IN -->
+
+                    <a
+                        class="nav-link category-link"
+                        href="/login"
+                    >
+                        <i class="fa-solid fa-right-to-bracket nav-icon login-icon"></i>
+                        <span>Log in</span>
+                    </a>
+
+
+                <% } else { %>
+
+                    <!-- LOG OUT -->
+
+                    <a
+                        class="nav-link category-link"
+                        href="/logout"
+                    >
+                        <i class="fa-solid fa-right-from-bracket nav-icon logout-icon"></i>
+                        <span>Log out</span>
+                    </a>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

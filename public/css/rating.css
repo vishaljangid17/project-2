@@ -1,0 +1,271 @@
+/* =========================================================
+   WANDERLUST — MODERN STAR RATING
+   ========================================================= */
+
+
+/* =========================================================
+   INTERACTIVE REVIEW RATING
+   ========================================================= */
+
+.interactive-stars {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    width: fit-content;
+    margin-top: 8px;
+}
+
+
+/* =========================================================
+   HIDE RADIO BUTTONS
+   ========================================================= */
+
+.interactive-stars input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+    border: 0;
+}
+
+
+/* =========================================================
+   STAR
+   ========================================================= */
+
+.interactive-stars label {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    color: #d3d3d3;
+
+    font-size: 25px;
+    line-height: 1;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* Star icon */
+
+.interactive-stars label i {
+    pointer-events: none;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* =========================================================
+   NORMAL HOVER
+   ========================================================= */
+
+.interactive-stars label:hover {
+    color: #ffc107;
+
+    background: #fff8df;
+
+    transform: scale(1.12);
+}
+
+
+/* =========================================================
+   HOVER PREVIEW
+   ========================================================= */
+
+.interactive-stars label.star-hover {
+    color: #ffc107;
+
+    background: #fff8df;
+
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
+   SELECTED STARS
+   ========================================================= */
+
+.interactive-stars label.star-selected {
+    color: #ffc107;
+
+    background: #fff8df;
+
+    filter:
+        drop-shadow(
+            0 2px 3px rgba(255, 193, 7, 0.25)
+        );
+}
+
+
+/* =========================================================
+   SELECTED STAR ICON
+   ========================================================= */
+
+.interactive-stars label.star-selected i {
+    filter:
+        drop-shadow(
+            0 1px 2px rgba(255, 193, 7, 0.25)
+        );
+}
+
+
+/* =========================================================
+   STAR CLICK POP ANIMATION
+   ========================================================= */
+
+.interactive-stars label.star-pop {
+    animation:
+        reviewStarPop
+        0.45s
+        cubic-bezier(.2, .8, .2, 1);
+}
+
+
+@keyframes reviewStarPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.45) rotate(-8deg);
+    }
+
+    55% {
+        transform: scale(0.9) rotate(5deg);
+    }
+
+    75% {
+        transform: scale(1.15) rotate(-2deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+/* =========================================================
+   RATING TEXT
+   ========================================================= */
+
+.rating-text {
+    min-height: 21px;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #717171;
+}
+
+
+/* =========================================================
+   DISPLAYED REVIEW STARS
+   ========================================================= */
+
+.review-rating {
+    display: flex;
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+
+/* Every review star */
+
+.review-rating i {
+    font-size: 15px;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* Filled */
+
+.review-rating .fa-solid.fa-star {
+    color: #ffc107;
+
+    filter:
+        drop-shadow(
+            0 1px 2px rgba(255, 193, 7, 0.25)
+        );
+}
+
+
+/* Empty */
+
+.review-rating .fa-regular.fa-star {
+    color: #d6d6d6;
+}
+
+
+/* Hover effect */
+
+.review-card:hover .review-rating i {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.interactive-stars input:focus-visible + label {
+    outline: 2px solid #111827;
+    outline-offset: 3px;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .interactive-stars {
+        gap: 4px;
+    }
+
+    .interactive-stars label {
+        width: 36px;
+        height: 36px;
+
+        font-size: 24px;
+    }
+
+}

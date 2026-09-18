@@ -1,0 +1,640 @@
+<% layout("/layouts/boilerplate") -%>
+
+<style>
+
+/* ==================================================
+   LISTINGS PAGE
+================================================== */
+
+.listings-page {
+    padding-top: 25px;
+}
+
+
+/* ==================================================
+   SEARCH SECTION
+================================================== */
+
+.search-section {
+    display: flex;
+    justify-content: center;
+
+    padding: 5px 0 25px;
+}
+
+
+/* ==================================================
+   SEARCH BAR
+================================================== */
+
+.search-bar {
+    width: 850px;
+    max-width: 95%;
+
+    min-height: 68px;
+
+    display: flex;
+    align-items: center;
+
+    background: #fff;
+
+    border: 1px solid #ddd;
+
+    border-radius: 40px;
+
+    padding: 6px 8px 6px 20px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+
+    transition: all 0.2s ease;
+}
+
+.search-bar:hover {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ==================================================
+   SEARCH ITEM
+================================================== */
+
+.search-item {
+    display: flex;
+    align-items: center;
+
+    flex: 1;
+
+    min-width: 0;
+
+    gap: 10px;
+}
+
+
+/* ==================================================
+   SEARCH ICONS
+================================================== */
+
+.search-icon {
+    font-size: 1.1rem;
+
+    flex-shrink: 0;
+}
+
+.location-icon {
+    color: #FF385C;
+}
+
+.calendar-icon {
+    color: #7B61FF;
+}
+
+.checkout-icon {
+    color: #00A8E8;
+}
+
+.guests-icon {
+    color: #FF6B35;
+}
+
+
+/* ==================================================
+   SEARCH CONTENT
+================================================== */
+
+.search-content {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+/* Label */
+
+.search-content label {
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: #222;
+
+    margin-bottom: 2px;
+}
+
+
+/* Input */
+
+.search-content input {
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    width: 100%;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    color: #555;
+
+    padding: 0;
+}
+
+.search-content input::placeholder {
+    color: #777;
+}
+
+
+/* Remove number arrows */
+
+.search-content input[type="number"]::-webkit-inner-spin-button,
+.search-content input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+
+    margin: 0;
+}
+
+
+/* ==================================================
+   SEARCH DIVIDER
+================================================== */
+
+.search-divider {
+    width: 1px;
+
+    height: 32px;
+
+    background: #ddd;
+
+    margin: 0 12px;
+}
+
+
+/* ==================================================
+   SEARCH BUTTON
+================================================== */
+
+.search-button {
+    width: 52px;
+
+    height: 52px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #FF385C;
+
+    color: white;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+.search-button:hover {
+    background: #E31C5F;
+
+    transform: scale(1.05);
+}
+
+
+/* ==================================================
+   LISTINGS HEADING
+================================================== */
+
+.listings-heading {
+    margin: 2rem 0 1.5rem;
+
+    font-weight: 700;
+
+    font-size: 2rem;
+}
+
+
+/* ==================================================
+   LISTINGS GRID
+================================================== */
+
+.listings-container {
+    margin-top: 10px;
+}
+
+
+/* ==================================================
+   LISTING CARD
+================================================== */
+
+.listing-card {
+    border: none;
+
+    background: transparent;
+
+    margin-bottom: 2rem;
+
+    cursor: pointer;
+}
+
+
+/* ==================================================
+   LISTING IMAGE
+================================================== */
+
+.listing-card .card-img-top {
+    width: 100%;
+
+    height: 260px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    transition: transform 0.2s ease;
+}
+
+.listing-card:hover .card-img-top {
+    transform: scale(1.02);
+}
+
+
+/* ==================================================
+   CARD BODY
+================================================== */
+
+.listing-card .card-body {
+    padding: 12px 2px;
+}
+
+
+/* ==================================================
+   LISTING TITLE
+================================================== */
+
+.listing-title {
+    font-size: 16px;
+
+    font-weight: 600;
+
+    margin-bottom: 4px;
+
+    color: #222;
+}
+
+
+/* ==================================================
+   LISTING LOCATION
+================================================== */
+
+.listing-location {
+    color: #717171;
+
+    font-size: 14px;
+
+    margin-bottom: 4px;
+}
+
+
+/* ==================================================
+   LISTING PRICE
+================================================== */
+
+.listing-price {
+    font-size: 15px;
+
+    color: #222;
+
+    margin: 0;
+}
+
+.listing-price strong {
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   LISTING LINK
+================================================== */
+
+.listing-link {
+    text-decoration: none;
+
+    color: inherit;
+}
+
+.listing-link:hover {
+    color: inherit;
+}
+
+
+/* ==================================================
+   MOBILE SEARCH
+================================================== */
+
+@media (max-width: 767px) {
+
+    .listings-page {
+        padding-top: 15px;
+    }
+
+    .search-section {
+        padding: 5px 0 20px;
+    }
+
+    .search-bar {
+        width: 100%;
+
+        max-width: 100%;
+
+        min-height: auto;
+
+        border-radius: 20px;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 12px;
+    }
+
+    .search-item {
+        width: 100%;
+    }
+
+    .search-divider {
+        width: 100%;
+
+        height: 1px;
+
+        margin: 0;
+    }
+
+    .search-button {
+        width: 100%;
+
+        height: 45px;
+
+        border-radius: 12px;
+    }
+
+    .listing-card .card-img-top {
+        height: 240px;
+    }
+
+    .listing-title {
+        font-size: 15px;
+    }
+
+    .listing-location {
+        font-size: 13px;
+    }
+
+    .listing-price {
+        font-size: 14px;
+    }
+}
+
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 576px) {
+
+    .listings-container {
+        margin-top: 5px;
+    }
+
+}
+</style>
+
+
+<!-- ==================================================
+     MAIN LISTINGS PAGE
+================================================== -->
+
+<div class="container listings-page">
+
+
+    <!-- ==================================================
+         SEARCH BAR
+    ================================================== -->
+
+    <div class="search-section">
+
+        <form
+            class="search-bar"
+            action="/listings"
+            method="GET"
+        >
+
+            <!-- WHERE -->
+            <div class="search-item">
+
+                <i class="fa-solid fa-location-dot search-icon location-icon"></i>
+
+                <div class="search-content">
+
+                    <label>Where</label>
+
+                    <input
+                        type="text"
+                        name="location"
+                        placeholder="Search destinations"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+            <div class="search-divider"></div>
+
+
+            <!-- CHECK IN -->
+            <div class="search-item">
+
+                <i class="fa-regular fa-calendar search-icon calendar-icon"></i>
+
+                <div class="search-content">
+
+                    <label>Check in</label>
+
+                    <input
+                        type="date"
+                        name="checkIn"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+            <div class="search-divider"></div>
+
+
+            <!-- CHECK OUT -->
+            <div class="search-item">
+
+                <i class="fa-regular fa-calendar search-icon checkout-icon"></i>
+
+                <div class="search-content">
+
+                    <label>Check out</label>
+
+                    <input
+                        type="date"
+                        name="checkOut"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- DIVIDER -->
+            <div class="search-divider"></div>
+
+
+            <!-- GUESTS -->
+            <div class="search-item">
+
+                <i class="fa-solid fa-user-group search-icon guests-icon"></i>
+
+                <div class="search-content">
+
+                    <label>Guests</label>
+
+                    <input
+                        type="number"
+                        name="guests"
+                        min="1"
+                        placeholder="Add guests"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH BUTTON -->
+            <button
+                class="search-button"
+                type="submit"
+                aria-label="Search"
+            >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- ==================================================
+         FILTERS
+    ================================================== -->
+
+    <div id="filters">
+
+        <div class="filter">
+            <!-- Filters can be added here later -->
+        </div>
+
+    </div>
+
+
+    <!-- ==================================================
+         LISTINGS
+    ================================================== -->
+
+    <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 listings-container">
+
+        <% for(let listing of allListings) { %>
+
+            <div class="col">
+
+                <a
+                    href="/listings/<%= listing._id %>"
+                    class="listing-link"
+                >
+
+                    <div class="card listing-card">
+
+
+                        <!-- LISTING IMAGE -->
+
+                        <img
+                            src="<%= listing.image.url %>"
+                            class="card-img-top"
+                            alt="<%= listing.title %>"
+                        >
+
+
+                        <!-- CARD BODY -->
+
+                        <div class="card-body">
+
+
+                            <!-- TITLE -->
+
+                            <div class="listing-title">
+
+                                <%= listing.title %>
+
+                            </div>
+
+
+                            <!-- LOCATION -->
+
+                            <div class="listing-location">
+
+                                <%= listing.location %>,
+                                <%= listing.country %>
+
+                            </div>
+
+
+                            <!-- PRICE -->
+
+                            <p class="listing-price">
+
+                                <strong>
+                                    ₹<%= listing.price.toLocaleString("en-IN") %>
+                                </strong>
+
+                                night
+
+                            </p>
+
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>

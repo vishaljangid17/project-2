@@ -1,0 +1,36 @@
+<% if (success && success.length) { %>
+
+    <div class="custom-flash success-flash" role="alert">
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span><%= success %></span>
+
+        <button
+            type="button"
+            class="flash-close"
+            onclick="this.closest('.custom-flash').remove()"
+            aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+<% } %>
+
+
+<% if (error && error.length) { %>
+
+    <div class="custom-flash error-flash" role="alert">
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <span><%= error %></span>
+
+        <button
+            type="button"
+            class="flash-close"
+            onclick="this.closest('.custom-flash').remove()"
+            aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+<% } %>

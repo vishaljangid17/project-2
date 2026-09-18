@@ -1,0 +1,1816 @@
+/* ==================================================
+   WANDERLUST — CLEANED STYLE.CSS
+   Structure and class names preserved.
+================================================== */
+
+
+/* ==================================================
+   GLOBAL PAGE WIDTH
+================================================== */
+
+html,
+body {
+    width: 100%;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+main {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* ==================================================
+   NAVBAR
+================================================== */
+
+.navbar {
+    width: 100%;
+    max-width: 100%;
+    height: 72px;
+    background-color: #fff !important;
+    border-bottom: 1px solid #eeeeee !important;
+    box-sizing: border-box;
+}
+
+.navbar-container {
+    width: 100%;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 0 28px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   LOGO
+================================================== */
+
+.navbar-logo {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.navbar-logo i {
+    color: #FF385C;
+    font-size: 25px;
+    transition: transform 0.2s ease;
+}
+
+.navbar-logo:hover i {
+    transform: scale(1.08);
+}
+
+
+/* ==================================================
+   NAVBAR CONTENT
+================================================== */
+
+.navbar-collapse {
+    flex: 1;
+    display: flex !important;
+    align-items: center;
+}
+
+
+/* ==================================================
+   CENTER CATEGORY NAV
+================================================== */
+
+.categories-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+/* ==================================================
+   NAVBAR ITEM
+================================================== */
+
+.category-link {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 85px;
+    height: 65px;
+
+    padding: 5px 10px !important;
+
+    gap: 3px;
+
+    color: #222 !important;
+    text-decoration: none;
+
+    position: relative;
+    white-space: nowrap;
+}
+
+.category-link .nav-icon {
+    margin: 0;
+
+    font-size: 1.25rem;
+    line-height: 1;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+.category-link span {
+    font-size: 11px;
+    font-weight: 500;
+
+    line-height: 1;
+    white-space: nowrap;
+}
+
+
+/* ==================================================
+   NAVBAR COLORS
+================================================== */
+
+.all-icon {
+    color: #FF385C;
+}
+
+.homes-icon,
+.host-icon {
+    color: #FF6B35;
+}
+
+.experiences-icon,
+.signup-icon {
+    color: #7B61FF;
+}
+
+.services-icon,
+.login-icon {
+    color: #00A8E8;
+}
+
+.logout-icon {
+    color: #E63946;
+}
+
+
+/* ==================================================
+   ACTIVE CATEGORY
+================================================== */
+
+.active-category::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 1px;
+
+    left: 20px;
+    right: 20px;
+
+    height: 3px;
+
+    background-color: #222;
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   NAVBAR HOVER
+================================================== */
+
+.category-link:hover .nav-icon {
+    transform: translateY(-3px) scale(1.08);
+}
+
+.category-link:hover span {
+    color: #FF385C;
+}
+
+
+/* ==================================================
+   RIGHT NAV
+================================================== */
+
+.right-nav {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+
+/* ==================================================
+   INTERACTIVE REVIEW STARS
+================================================== */
+
+.interactive-stars {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 8px;
+}
+
+.interactive-stars input {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+
+    clip: rect(0, 0, 0, 0);
+
+    white-space: nowrap;
+
+    border: 0;
+}
+
+.interactive-stars label {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    color: #d3d3d3;
+
+    font-size: 25px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease,
+        filter 0.2s ease;
+}
+
+.interactive-stars label i {
+    pointer-events: none;
+}
+
+.interactive-stars label:hover,
+.interactive-stars label.star-hover,
+.interactive-stars label.star-selected {
+    color: #ffc107;
+    background: #fff8df;
+}
+
+.interactive-stars label:hover {
+    transform: scale(1.18);
+}
+
+.interactive-stars label.star-hover {
+    transform: scale(1.15);
+}
+
+.interactive-stars label.star-selected {
+    filter: drop-shadow(
+        0 2px 3px rgba(255, 193, 7, 0.25)
+    );
+}
+
+
+/* ==================================================
+   STAR CLICK ANIMATION
+================================================== */
+
+.interactive-stars label.star-pop {
+    animation:
+        reviewStarPop
+        0.45s
+        cubic-bezier(.2, .8, .2, 1);
+}
+
+@keyframes reviewStarPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.45) rotate(-8deg);
+    }
+
+    55% {
+        transform: scale(0.9) rotate(5deg);
+    }
+
+    75% {
+        transform: scale(1.15) rotate(-2deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(0);
+    }
+
+}
+
+
+/* ==================================================
+   RATING TEXT
+================================================== */
+
+.rating-text {
+    margin-top: 8px;
+
+    min-height: 21px;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    color: #717171;
+}
+
+
+/* ==================================================
+   REVIEWS
+================================================== */
+
+.reviews-section {
+    margin-top: 55px !important;
+}
+
+.reviews-section h3 {
+    font-size: 28px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+
+/* ==================================================
+   REVIEW CARD
+================================================== */
+
+.review-card {
+    position: relative;
+
+    background: #fff;
+
+    border: 1px solid #ebebeb !important;
+
+    border-radius: 18px !important;
+
+    padding: 24px !important;
+
+    min-height: 175px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 28px rgba(0, 0, 0, 0.08);
+
+    border-color: #dedede !important;
+}
+
+
+/* ==================================================
+   REVIEW AVATAR
+================================================== */
+
+.review-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #f2f2f2;
+
+    color: #333;
+
+    font-size: 17px;
+
+    flex-shrink: 0;
+}
+
+.review-card strong {
+    font-size: 15px;
+    font-weight: 650;
+}
+
+
+/* ==================================================
+   DISPLAYED REVIEW STARS
+================================================== */
+
+.review-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 12px;
+
+    margin-bottom: 12px !important;
+}
+
+.review-rating i {
+    font-size: 15px;
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+.review-rating .fa-star:not(.fa-regular) {
+    color: #ffc107;
+
+    filter: drop-shadow(
+        0 1px 2px rgba(255, 193, 7, 0.25)
+    );
+}
+
+.review-rating .fa-regular {
+    color: #d6d6d6;
+}
+
+.review-card:hover .review-rating i {
+    transform: scale(1.05);
+}
+
+
+/* ==================================================
+   REVIEW COMMENT
+================================================== */
+
+.review-comment {
+    color: #444;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-top: 8px !important;
+
+    margin-bottom: 0 !important;
+}
+
+
+/* ==================================================
+   DELETE REVIEW
+================================================== */
+
+.review-card form {
+    margin-top: 16px !important;
+}
+
+.review-card .btn-outline-danger {
+    border: none !important;
+
+    padding: 0 !important;
+
+    font-size: 13px;
+
+    color: #777;
+
+    background: transparent !important;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.review-card .btn-outline-danger:hover {
+    color: #e31c5f !important;
+
+    transform: translateX(2px);
+}
+
+.review-card .btn-outline-danger i {
+    margin-right: 4px;
+}
+
+
+/* ==================================================
+   REVIEW FORM
+================================================== */
+
+.review-form-section {
+    margin-top: 55px !important;
+
+    padding: 28px;
+
+    border: 1px solid #ebebeb;
+
+    border-radius: 18px;
+
+    background: #fff;
+
+    box-shadow:
+        0 4px 18px rgba(0, 0, 0, 0.04);
+}
+
+.review-form-section h3 {
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+.review-form-section textarea {
+    border-radius: 12px;
+
+    border: 1px solid #d8d8d8;
+
+    padding: 13px 15px;
+
+    resize: vertical;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.review-form-section textarea:focus {
+    border-color: #222;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.review-form-section .btn-danger {
+    border-radius: 10px;
+
+    padding: 10px 20px;
+
+    font-weight: 600;
+
+    border: none;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.review-form-section .btn-danger:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 14px rgba(227, 28, 95, 0.2);
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.site-footer {
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 80px;
+
+    background: #fafafa;
+
+    border-top: 1px solid #eaeaea;
+
+    box-sizing: border-box;
+}
+
+.site-footer .f-info {
+    width: 100%;
+
+    min-height: 190px;
+
+    padding: 40px 30px 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 17px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+
+/* ==================================================
+   FOOTER SOCIAL ICONS
+================================================== */
+
+.site-footer .f-info-socials {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+}
+
+.site-footer .f-info-socials a {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    border: 1px solid #e5e5e5;
+
+    color: #555;
+
+    text-decoration: none;
+
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.site-footer .f-info-socials a:hover {
+    color: #FF385C;
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.site-footer .f-info-socials i {
+    font-size: 17px;
+}
+
+
+/* ==================================================
+   FOOTER COPYRIGHT
+================================================== */
+
+.site-footer .f-info-brand {
+    color: #555;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+.site-footer .f-info-brand span {
+    color: #222;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   FOOTER LINKS
+================================================== */
+
+.site-footer .f-info-links {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+}
+
+.site-footer .f-info-links a {
+    color: #555 !important;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    text-decoration: none !important;
+
+    transition: color 0.2s ease;
+}
+
+.site-footer .f-info-links a:hover {
+    color: #FF385C !important;
+
+    text-decoration: underline !important;
+}
+
+.footer-dot {
+    color: #aaa;
+
+    font-size: 12px;
+}
+
+
+/* ==================================================
+   MODERN FLASH POPUP
+================================================== */
+
+.custom-flash {
+    position: fixed;
+
+    top: 90px;
+    left: 50%;
+
+    width: min(420px, calc(100vw - 40px));
+    max-width: 420px;
+
+    margin: 0 !important;
+
+    padding: 16px 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    transform: translateX(-50%);
+
+    z-index: 99999;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 18px;
+
+    background: #fff;
+
+    color: #222;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.14),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+
+    box-sizing: border-box;
+
+    animation:
+        wanderlustFlashPop
+        0.35s
+        cubic-bezier(.2, .8, .2, 1);
+}
+
+.custom-flash > i:first-child {
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+}
+
+.success-flash > i:first-child {
+    color: #22c55e;
+
+    background: #eaf8f0;
+}
+
+.error-flash > i:first-child {
+    color: #FF385C;
+
+    background: #fff0f2;
+}
+
+.custom-flash span {
+    flex: 1;
+
+    line-height: 1.4;
+}
+
+
+/* ==================================================
+   FLASH CLOSE
+================================================== */
+
+.flash-close {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    padding: 0;
+
+    margin-left: auto;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.flash-close:hover {
+    color: #222;
+
+    background: #f3f3f3;
+
+    transform: rotate(90deg);
+}
+
+.flash-close i {
+    font-size: 14px;
+}
+
+
+/* ==================================================
+   FLASH ANIMATION
+================================================== */
+
+@keyframes wanderlustFlashPop {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-18px)
+            scale(0.94);
+    }
+
+    70% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(3px)
+            scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+}/* ==================================================
+   LISTING SHOW PAGE
+================================================== */
+
+.listing-show-page {
+    width: min(1100px, calc(100% - 40px));
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding-bottom: 45px;
+}
+
+
+/* ==================================================
+   LISTING HEADER
+================================================== */
+
+.listing-header {
+    width: 100%;
+
+    text-align: center;
+
+    margin-bottom: 20px !important;
+}
+
+.listing-header .listing-title {
+    margin: 0 0 5px;
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    color: #222;
+}
+
+.listing-header p {
+    font-size: 14px;
+}
+
+
+/* ==================================================
+   LISTING IMAGE
+================================================== */
+
+.listing-image-wrapper {
+    width: min(900px, 100%);
+
+    height: 430px;
+
+    margin: 0 auto 35px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #f5f5f5;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+.listing-show-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    border-radius: 20px;
+}
+
+
+/* ==================================================
+   LISTING MAIN CONTENT
+================================================== */
+
+.listing-main-content {
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.listing-info-section {
+    width: 100%;
+}
+
+.listing-info {
+    text-align: center;
+}
+
+.listing-info h3 {
+    font-size: 28px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+
+/* ==================================================
+   DETAILS LAYOUT
+================================================== */
+
+.listing-details-layout {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        350px;
+
+    gap: 35px;
+
+    align-items: start;
+}
+
+
+/* ==================================================
+   ABOUT LISTING
+================================================== */
+
+.listing-about-section {
+    text-align: left;
+
+    padding: 5px 0;
+}
+
+.listing-about-section .listing-info-title {
+    margin: 0 0 5px;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.hosted-by {
+    margin-bottom: 15px;
+
+    font-size: 14px;
+}
+
+.listing-about-section hr {
+    margin: 15px 0 20px;
+}
+
+
+/* ==================================================
+   DESCRIPTION
+================================================== */
+
+.listing-description {
+    max-width: 760px;
+
+    margin: 35px auto 0;
+
+    text-align: center;
+}
+
+.listing-about-section .listing-description {
+    max-width: none;
+
+    margin: 0;
+
+    text-align: left;
+}
+
+.listing-description h2 {
+    margin: 0 0 12px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.listing-description h4 {
+    font-size: 26px;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+.listing-description p {
+    margin: 0;
+
+    color: #555;
+
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+
+/* ==================================================
+   PRICE
+================================================== */
+
+.listing-price {
+    margin: 20px 0 30px;
+
+    text-align: center;
+}
+
+.listing-price h4 {
+    margin: 0;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+
+/* ==================================================
+   BOOKING SECTION
+================================================== */
+
+.booking-section {
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+
+    margin: 0;
+}
+
+
+/* ==================================================
+   BOOKING CARD
+================================================== */
+
+.listing-booking-card {
+    width: 100%;
+
+    padding: 21px !important;
+
+    text-align: left;
+
+    background: #fff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.booking-card-price {
+    margin-bottom: 17px;
+
+    font-size: 23px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.listing-booking-card .form-label {
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #444;
+}
+
+.listing-booking-card .form-control,
+.listing-booking-card .form-select {
+    min-height: 40px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+}
+
+.reserve-btn {
+    padding: 10px !important;
+
+    border-radius: 10px !important;
+
+    font-weight: 600;
+}
+
+
+/* ==================================================
+   OWNER ACTIONS
+================================================== */
+
+.owner-actions-section {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 25px auto 0;
+
+    text-align: left;
+}
+
+.owner-actions {
+    max-width: 500px;
+}
+
+
+/* ==================================================
+   MAP SECTION
+================================================== */
+
+.listing-map-section {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 40px auto 0;
+
+    text-align: left;
+}
+
+.listing-map-section h2 {
+    margin: 0 0 15px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+
+/* ==================================================
+   MAPBOX
+================================================== */
+
+#map,
+.listing-map-section #map {
+    width: 100%;
+
+    height: 390px;
+
+    margin: 0 auto;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    border: 1px solid #e5e5e5;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==================================================
+   SHOW PAGE REVIEWS
+================================================== */
+
+.listing-show-page .reviews-section {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 40px auto 0;
+
+    text-align: left;
+}
+
+.listing-show-page .reviews-section h2 {
+    margin: 0 0 18px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.listing-show-page .reviews-section > .row,
+.listing-show-page .reviews-section .row {
+    margin-left: 0;
+
+    margin-right: 0;
+}
+
+
+/* ==================================================
+   SHOW PAGE REVIEW CARD
+================================================== */
+
+.listing-show-page .review-card {
+    height: 100%;
+
+    border: 1px solid #e8e8e8 !important;
+
+    border-radius: 14px !important;
+
+    background: #fff;
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.listing-show-page .review-comment {
+    line-height: 1.55;
+}
+
+.listing-show-page .review-rating {
+    justify-content: center;
+}
+
+
+/* ==================================================
+   SHOW PAGE REVIEW FORM
+================================================== */
+
+.listing-show-page .review-form-section {
+    width: 100%;
+
+    max-width: 1000px;
+
+    margin: 35px auto 0;
+
+    text-align: left;
+}
+
+.listing-show-page .review-form-section h2 {
+    margin: 0 0 18px;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.listing-show-page .review-form-section form {
+    text-align: left;
+}
+
+.listing-show-page .review-form-section textarea {
+    max-width: 700px;
+
+    border-radius: 10px;
+}
+
+
+/* ==================================================
+   SHOW PAGE SPACING
+================================================== */
+
+.listing-show-page .mb-4 {
+    margin-bottom: 1.25rem !important;
+}
+
+.listing-show-page .mt-5 {
+    margin-top: 1.75rem !important;
+}
+
+
+/* ==================================================
+   WANDERLUST RED HOME MAP MARKER
+================================================== */
+
+.wanderlust-map-marker {
+    width: 48px;
+
+    height: 58px;
+
+    cursor: pointer;
+}
+
+.wl-map-pin {
+    width: 44px;
+
+    height: 44px;
+
+    background: #ff385c;
+
+    border: 3px solid #ffffff;
+
+    border-radius:
+        50%
+        50%
+        50%
+        0;
+
+    transform: rotate(-45deg);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.25);
+}
+
+.wl-map-pin-inner {
+    transform: rotate(45deg);
+
+    color: #ffffff;
+
+    font-size: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ==================================================
+   MOBILE NAVBAR
+================================================== */
+
+@media (max-width: 767px) {
+
+    .navbar {
+        height: auto;
+
+        min-height: 65px;
+    }
+
+    .navbar-container {
+        padding: 0 15px;
+    }
+
+    .navbar-left {
+        gap: 10px;
+    }
+
+    .navbar-collapse {
+        flex: none;
+
+        width: 100%;
+    }
+
+    .navbar-collapse:not(.show) {
+        display: none !important;
+    }
+
+    .navbar-collapse.show {
+        display: block !important;
+    }
+
+    .categories-nav {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: flex-start;
+
+        width: 100%;
+
+        gap: 0;
+
+        margin-top: 10px;
+    }
+
+    .right-nav {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: flex-start;
+
+        width: 100%;
+
+        gap: 0;
+
+        margin-top: 5px;
+    }
+
+    .category-link {
+        flex-direction: row;
+
+        justify-content: flex-start;
+
+        width: 100%;
+
+        height: auto;
+
+        gap: 10px;
+
+        padding: 10px 15px !important;
+    }
+
+    .category-link span {
+        font-size: 14px;
+    }
+
+    .active-category::after {
+        display: none;
+    }
+
+
+    /* REVIEW STARS */
+
+    .interactive-stars {
+        gap: 4px;
+    }
+
+    .interactive-stars label {
+        width: 36px;
+
+        height: 36px;
+
+        font-size: 24px;
+    }
+
+
+    /* REVIEW CARD */
+
+    .review-card {
+        padding: 20px !important;
+
+        min-height: auto;
+    }
+
+    .reviews-section h3 {
+        font-size: 24px;
+    }
+
+
+    /* REVIEW FORM */
+
+    .review-form-section {
+        padding: 20px;
+    }
+
+
+    /* FOOTER */
+
+    .site-footer {
+        margin-top: 55px;
+    }
+
+    .site-footer .f-info {
+        min-height: 170px;
+
+        padding: 32px 20px 25px;
+    }
+
+    .site-footer .f-info-socials {
+        gap: 11px;
+    }
+
+    .site-footer .f-info-socials a {
+        width: 38px;
+
+        height: 38px;
+    }
+
+
+    /* FLASH */
+
+    .custom-flash {
+        top: 82px;
+
+        left: 50%;
+
+        right: auto;
+
+        width: calc(100vw - 30px);
+
+        max-width: 420px;
+
+        padding: 15px 16px;
+
+        transform: translateX(-50%);
+    }
+
+    .custom-flash > i:first-child {
+        width: 34px;
+
+        height: 34px;
+
+        font-size: 16px;
+    }
+
+    .custom-flash span {
+        font-size: 14px;
+    }
+
+    .flash-close {
+        width: 30px;
+
+        height: 30px;
+    }
+
+}
+
+
+/* ==================================================
+   SHOW PAGE — TABLET
+================================================== */
+
+@media (max-width: 850px) {
+
+    .listing-details-layout {
+        grid-template-columns: 1fr;
+
+        gap: 25px;
+    }
+
+    .booking-section {
+        max-width: 500px;
+
+        margin: 0 auto;
+    }
+
+    .owner-actions-section,
+    .listing-map-section,
+    .listing-show-page .reviews-section,
+    .listing-show-page .review-form-section {
+        width: 100%;
+    }
+
+}
+
+
+/* ==================================================
+   SHOW PAGE — MOBILE
+================================================== */
+
+@media (max-width: 768px) {
+
+    .listing-show-page {
+        width: calc(100% - 24px);
+    }
+
+    .listing-header .listing-title {
+        font-size: 26px;
+    }
+
+    .listing-image-wrapper {
+        height: 360px;
+
+        border-radius: 18px;
+    }
+
+    .listing-show-image {
+        border-radius: 18px;
+    }
+
+    .listing-info h3 {
+        font-size: 24px;
+    }
+
+    .listing-description h4 {
+        font-size: 23px;
+    }
+
+    .listing-map-section h2 {
+        font-size: 23px;
+    }
+
+    #map,
+    .listing-map-section #map {
+        height: 360px;
+
+        border-radius: 18px;
+    }
+
+}
+
+
+/* ==================================================
+   SHOW PAGE — SMALL MOBILE
+================================================== */
+
+@media (max-width: 600px) {
+
+    .listing-show-page {
+        width: calc(100% - 24px);
+
+        padding-bottom: 30px;
+    }
+
+    .listing-header .listing-title {
+        font-size: 25px;
+    }
+
+    .listing-image-wrapper {
+        height: 300px;
+
+        margin-bottom: 28px;
+
+        border-radius: 16px;
+    }
+
+    .listing-show-image {
+        border-radius: 16px;
+    }
+
+    .listing-details-layout {
+        gap: 22px;
+    }
+
+    .listing-description h2,
+    .listing-map-section h2,
+    .listing-show-page .reviews-section h2,
+    .listing-show-page .review-form-section h2 {
+        font-size: 21px;
+    }
+
+    .listing-map-section {
+        margin-top: 32px;
+    }
+
+    #map,
+    .listing-map-section #map {
+        height: 320px;
+
+        border-radius: 15px;
+    }
+
+}
+
+
+/* ==================================================
+   EXTRA SMALL MOBILE
+================================================== */
+
+@media (max-width: 480px) {
+
+    .listing-show-page {
+        width: calc(100% - 20px);
+    }
+
+    .listing-image-wrapper {
+        height: 280px;
+
+        border-radius: 16px;
+    }
+
+    .listing-show-image {
+        border-radius: 16px;
+    }
+
+    #map,
+    .listing-map-section #map {
+        height: 320px;
+
+        border-radius: 16px;
+    }
+
+}
+
+
+/* ==================================================
+   VERY SMALL MOBILE
+================================================== */
+
+@media (max-width: 400px) {
+
+    .listing-image-wrapper {
+        height: 270px;
+    }
+
+    .listing-booking-card {
+        padding: 18px !important;
+    }
+
+    #map,
+    .listing-map-section #map {
+        height: 300px;
+    }
+
+}

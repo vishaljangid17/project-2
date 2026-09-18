@@ -1,0 +1,788 @@
+<% layout("/layouts/boilerplate") -%>
+
+<div class="new-listing-page">
+
+    <div class="new-listing-container">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="new-listing-header">
+
+            <h1>Create a New Listing</h1>
+
+            <p>
+                Share your place with Wanderlust travelers.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             FORM CARD
+        ========================== -->
+
+        <div class="new-listing-card">
+
+            <form
+                method="POST"
+                action="/listings"
+                novalidate
+                class="needs-validation"
+                enctype="multipart/form-data"
+            >
+
+                <!-- =========================
+                     TITLE
+                ========================== -->
+
+                <div class="listing-field">
+
+                    <label for="title">
+                        Title
+                    </label>
+
+                    <input
+                        id="title"
+                        name="listing[title]"
+                        placeholder="My Villa"
+                        type="text"
+                        required
+                    >
+
+                    <div class="valid-feedback">
+                        Title looks good!
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter a title.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     DESCRIPTION
+                ========================== -->
+
+                <div class="listing-field">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="listing[description]"
+                        placeholder="Tell guests about your place..."
+                        required
+                    ></textarea>
+
+                    <div class="valid-feedback">
+                        Description looks good!
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter a description.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     IMAGE
+                ========================== -->
+
+                <div class="listing-field">
+
+                    <label for="image">
+                        Cover Image
+                    </label>
+
+                    <div class="image-upload-box">
+
+                        <i class="fa-regular fa-image"></i>
+
+                        <div class="image-upload-content">
+
+                            <span class="image-upload-title">
+                                Upload your listing image
+                            </span>
+
+                            <span class="image-upload-subtitle">
+                                Choose a clear and attractive photo
+                            </span>
+
+                        </div>
+
+                        <input
+                            id="image"
+                            name="listing[image][url]"
+                            type="file"
+                            accept="image/*"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please upload an image.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     PRICE + COUNTRY
+                ========================== -->
+
+                <div class="listing-row">
+
+                    <!-- PRICE -->
+
+                    <div class="listing-field">
+
+                        <label for="price">
+                            Price per night
+                        </label>
+
+                        <div class="input-with-symbol">
+
+                            <span>₹</span>
+
+                            <input
+                                id="price"
+                                name="listing[price]"
+                                placeholder="17000"
+                                type="number"
+                                required
+                                min="1"
+                            >
+
+                        </div>
+
+                        <div class="valid-feedback">
+                            Price looks good!
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Enter a valid price!
+                        </div>
+
+                    </div>
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="listing-field">
+
+                        <label for="country">
+                            Country
+                        </label>
+
+                        <input
+                            id="country"
+                            name="listing[country]"
+                            placeholder="India"
+                            type="text"
+                            required
+                        >
+
+                        <div class="valid-feedback">
+                            Country looks good!
+                        </div>
+
+                        <div class="invalid-feedback">
+                            Please enter a country.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     LOCATION
+                ========================== -->
+
+                <div class="listing-field">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <div class="location-input">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        <input
+                            id="location"
+                            name="listing[location]"
+                            placeholder="Jaipur"
+                            type="text"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="valid-feedback">
+                        Location looks good!
+                    </div>
+
+                    <div class="invalid-feedback">
+                        Please enter a location.
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     BUTTON
+                ========================== -->
+
+                <div class="listing-submit-area">
+
+                    <button
+                        type="submit"
+                        class="create-listing-btn"
+                    >
+
+                        <span>Create Listing</span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     NEW LISTING PAGE CSS
+================================================== -->
+
+<style>
+
+    /* =========================
+       MAIN PAGE
+    ========================== */
+
+    .new-listing-page {
+
+        width: 100%;
+
+        padding: 55px 20px 80px;
+
+        background: #ffffff;
+
+        box-sizing: border-box;
+    }
+
+
+    .new-listing-container {
+
+        width: 100%;
+
+        max-width: 760px;
+
+        margin: 0 auto;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .new-listing-header {
+
+        text-align: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    .new-listing-header h1 {
+
+        margin: 0;
+
+        color: #222222;
+
+        font-size: 32px;
+
+        font-weight: 700;
+
+        letter-spacing: -0.7px;
+    }
+
+
+    .new-listing-header p {
+
+        margin: 9px 0 0;
+
+        color: #717171;
+
+        font-size: 15px;
+    }
+
+
+    /* =========================
+       FORM CARD
+    ========================== */
+
+    .new-listing-card {
+
+        width: 100%;
+
+        padding: 34px;
+
+        background: #ffffff;
+
+        border: 1px solid #e7e7e7;
+
+        border-radius: 18px;
+
+        box-shadow:
+            0 8px 28px rgba(0, 0, 0, 0.06);
+
+        box-sizing: border-box;
+    }
+
+
+    /* =========================
+       FIELD
+    ========================== */
+
+    .listing-field {
+
+        margin-bottom: 24px;
+
+        position: relative;
+    }
+
+
+    .listing-field label {
+
+        display: block;
+
+        margin-bottom: 8px;
+
+        color: #222222;
+
+        font-size: 14px;
+
+        font-weight: 600;
+    }
+
+
+    .listing-field input,
+    .listing-field textarea {
+
+        width: 100%;
+
+        box-sizing: border-box;
+
+        border: 1px solid #bdbdbd;
+
+        border-radius: 10px;
+
+        background: #ffffff;
+
+        color: #222222;
+
+        font-size: 14px;
+
+        outline: none;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .listing-field input {
+
+        height: 50px;
+
+        padding: 0 15px;
+    }
+
+
+    .listing-field textarea {
+
+        min-height: 125px;
+
+        padding: 14px 15px;
+
+        resize: vertical;
+
+        font-family: inherit;
+    }
+
+
+    .listing-field input::placeholder,
+    .listing-field textarea::placeholder {
+
+        color: #999999;
+    }
+
+
+    .listing-field input:focus,
+    .listing-field textarea:focus {
+
+        border-color: #ff385c;
+
+        box-shadow:
+            0 0 0 3px rgba(255, 56, 92, 0.10);
+    }
+
+
+    /* =========================
+       IMAGE UPLOAD
+    ========================== */
+
+    .image-upload-box {
+
+        position: relative;
+
+        min-height: 82px;
+
+        border: 1px dashed #bdbdbd;
+
+        border-radius: 12px;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 15px;
+
+        padding: 15px 18px;
+
+        box-sizing: border-box;
+
+        transition:
+            border-color 0.2s ease,
+            background 0.2s ease;
+    }
+
+
+    .image-upload-box:hover {
+
+        border-color: #ff385c;
+
+        background: #fffafa;
+    }
+
+
+    .image-upload-box > i {
+
+        width: 42px;
+
+        height: 42px;
+
+        border-radius: 50%;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #fff0f2;
+
+        color: #ff385c;
+
+        font-size: 18px;
+
+        flex-shrink: 0;
+    }
+
+
+    .image-upload-content {
+
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 4px;
+
+        flex: 1;
+    }
+
+
+    .image-upload-title {
+
+        color: #222222;
+
+        font-size: 14px;
+
+        font-weight: 600;
+    }
+
+
+    .image-upload-subtitle {
+
+        color: #717171;
+
+        font-size: 12px;
+    }
+
+
+    .image-upload-box input[type="file"] {
+
+        width: auto;
+
+        height: auto;
+
+        border: none;
+
+        padding: 0;
+
+        font-size: 12px;
+
+        box-shadow: none;
+
+    }
+
+
+    /* =========================
+       PRICE + COUNTRY
+    ========================== */
+
+    .listing-row {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 20px;
+    }
+
+
+    .listing-row .listing-field {
+
+        min-width: 0;
+    }
+
+
+    /* =========================
+       PRICE SYMBOL
+    ========================== */
+
+    .input-with-symbol {
+
+        position: relative;
+    }
+
+
+    .input-with-symbol > span {
+
+        position: absolute;
+
+        left: 15px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #555555;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        z-index: 2;
+    }
+
+
+    .input-with-symbol input {
+
+        padding-left: 32px;
+    }
+
+
+    /* =========================
+       LOCATION
+    ========================== */
+
+    .location-input {
+
+        position: relative;
+    }
+
+
+    .location-input i {
+
+        position: absolute;
+
+        left: 15px;
+
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        color: #717171;
+
+        font-size: 15px;
+
+        pointer-events: none;
+
+        z-index: 2;
+    }
+
+
+    .location-input input {
+
+        padding-left: 40px;
+    }
+
+
+    /* =========================
+       BUTTON
+    ========================== */
+
+    .listing-submit-area {
+
+        margin-top: 8px;
+
+        padding-top: 8px;
+
+        border-top: 1px solid #eeeeee;
+
+        display: flex;
+
+        justify-content: flex-end;
+    }
+
+
+    .create-listing-btn {
+
+        min-width: 170px;
+
+        height: 50px;
+
+        padding: 0 22px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        background: #ff385c;
+
+        color: #ffffff;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        cursor: pointer;
+
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+
+    .create-listing-btn:hover {
+
+        opacity: 0.92;
+
+        transform: translateY(-1px);
+    }
+
+
+    .create-listing-btn:active {
+
+        transform: translateY(0);
+    }
+
+
+    /* =========================
+       VALIDATION
+    ========================== */
+
+    .listing-field .invalid-feedback,
+    .listing-field .valid-feedback {
+
+        font-size: 12px;
+
+        margin-top: 6px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 700px) {
+
+        .new-listing-page {
+
+            padding: 35px 15px 60px;
+        }
+
+
+        .new-listing-header h1 {
+
+            font-size: 27px;
+        }
+
+
+        .new-listing-card {
+
+            padding: 25px 20px;
+
+            border-radius: 15px;
+        }
+
+
+        .listing-row {
+
+            grid-template-columns: 1fr;
+
+            gap: 0;
+        }
+
+
+        .image-upload-box {
+
+            flex-wrap: wrap;
+        }
+
+
+        .image-upload-box input[type="file"] {
+
+            width: 100%;
+        }
+
+
+        .listing-submit-area {
+
+            justify-content: stretch;
+        }
+
+
+        .create-listing-btn {
+
+            width: 100%;
+        }
+
+    }
+
+</style>

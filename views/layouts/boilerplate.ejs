@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Wanderlust</title>
+
+
+    <!-- ==================================================
+         BOOTSTRAP CSS
+    ================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==================================================
+         FONT AWESOME
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+
+    <!-- ==================================================
+         GOOGLE FONT
+    ================================================== -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- ==================================================
+         RATING CSS
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="/css/rating.css"
+    >
+
+
+    <!-- ==================================================
+         MAPLIBRE GL CSS
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.css"
+    >
+
+
+    <!-- ==================================================
+         CUSTOM CSS
+         KEEP THIS LAST
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================================
+         NAVBAR
+    ================================================== -->
+
+    <%- include("../includes/navbar.ejs") %>
+
+
+    <!-- ==================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main>
+
+        <%- include("../includes/flash.ejs") %>
+
+        <%- body -%>
+
+    </main>
+
+
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+
+    <%- include("../includes/footer.ejs") %>
+
+
+    <!-- ==================================================
+         BOOTSTRAP JS
+    ================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <!-- ==================================================
+         MAP JS
+         MapLibre is imported inside map.js
+    ================================================== -->
+
+    <script
+        type="module"
+        src="/js/map.js">
+    </script>
+
+
+    <!-- ==================================================
+         CUSTOM JS
+    ================================================== -->
+
+    <script
+        src="/js/script.js">
+    </script>
+
+
+</body>
+
+</html>

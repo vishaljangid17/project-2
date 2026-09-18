@@ -1,0 +1,448 @@
+<% layout("/layouts/boilerplate") -%>
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <div class="auth-header">
+
+            <div class="auth-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+
+            <h1>Create your account</h1>
+
+            <p>
+                Join Wanderlust and start exploring
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             SIGNUP FORM
+        ========================== -->
+
+        <form
+            action="/signup"
+            method="POST"
+            class="needs-validation auth-form"
+            novalidate
+        >
+
+            <!-- USERNAME -->
+
+            <div class="auth-field">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    <input
+                        id="username"
+                        name="username"
+                        type="text"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a username.
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="auth-field">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-regular fa-envelope"></i>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a valid email address.
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="auth-field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+                <div class="invalid-feedback">
+                    Please enter a password.
+                </div>
+
+            </div>
+
+
+            <!-- SIGNUP BUTTON -->
+
+            <button
+                type="submit"
+                class="auth-submit"
+            >
+                <span>Create account</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </form>
+
+
+        <!-- =========================
+             LOGIN LINK
+        ========================== -->
+
+        <div class="auth-footer">
+
+            <span>Already have an account?</span>
+
+            <a href="/login">
+                Log in
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     SIGNUP PAGE CSS
+========================== -->
+
+<style>
+
+    .auth-page {
+        min-height: calc(100vh - 160px);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        padding: 50px 20px;
+    }
+
+
+    .auth-card {
+        width: 100%;
+        max-width: 430px;
+
+        background: #ffffff;
+
+        border: 1px solid #e7e7e7;
+
+        border-radius: 20px;
+
+        padding: 38px 36px 32px;
+
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.07);
+    }
+
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .auth-header {
+        text-align: center;
+
+        margin-bottom: 30px;
+    }
+
+
+    .auth-icon {
+        width: 54px;
+        height: 54px;
+
+        margin: 0 auto 16px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: #fff0f2;
+
+        color: #ff385c;
+
+        font-size: 21px;
+    }
+
+
+    .auth-header h1 {
+        margin: 0;
+
+        font-size: 28px;
+
+        font-weight: 700;
+
+        letter-spacing: -0.5px;
+
+        color: #222222;
+    }
+
+
+    .auth-header p {
+        margin: 8px 0 0;
+
+        color: #717171;
+
+        font-size: 14px;
+
+        line-height: 1.5;
+    }
+
+
+    /* =========================
+       FORM
+    ========================== */
+
+    .auth-form {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    .auth-field label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        font-size: 14px;
+
+        font-weight: 600;
+
+        color: #222222;
+    }
+
+
+    .input-wrapper {
+        position: relative;
+
+        display: flex;
+
+        align-items: center;
+    }
+
+
+    .input-wrapper i {
+        position: absolute;
+
+        left: 15px;
+
+        color: #717171;
+
+        font-size: 15px;
+
+        pointer-events: none;
+    }
+
+
+    .input-wrapper input {
+        width: 100%;
+
+        height: 50px;
+
+        padding: 0 15px 0 43px;
+
+        border: 1px solid #bdbdbd;
+
+        border-radius: 10px;
+
+        outline: none;
+
+        font-size: 14px;
+
+        color: #222222;
+
+        background: #ffffff;
+
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease;
+    }
+
+
+    .input-wrapper input::placeholder {
+        color: #999999;
+    }
+
+
+    .input-wrapper input:focus {
+        border-color: #ff385c;
+
+        box-shadow:
+            0 0 0 3px rgba(255, 56, 92, 0.10);
+    }
+
+
+    /* =========================
+       SIGNUP BUTTON
+    ========================== */
+
+    .auth-submit {
+        width: 100%;
+
+        height: 50px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        background: #ff385c;
+
+        color: #ffffff;
+
+        font-size: 15px;
+
+        font-weight: 600;
+
+        cursor: pointer;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        margin-top: 2px;
+
+        transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+
+    .auth-submit:hover {
+        opacity: 0.92;
+
+        transform: translateY(-1px);
+    }
+
+
+    .auth-submit:active {
+        transform: translateY(0);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .auth-footer {
+        margin-top: 27px;
+
+        padding-top: 22px;
+
+        border-top: 1px solid #eeeeee;
+
+        text-align: center;
+
+        font-size: 14px;
+
+        color: #717171;
+    }
+
+
+    .auth-footer a {
+        margin-left: 5px;
+
+        color: #222222;
+
+        font-weight: 600;
+
+        text-decoration: underline;
+
+        text-underline-offset: 3px;
+    }
+
+
+    .auth-footer a:hover {
+        color: #ff385c;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 576px) {
+
+        .auth-page {
+            min-height: calc(100vh - 130px);
+
+            padding: 30px 15px;
+        }
+
+
+        .auth-card {
+            padding: 30px 22px 26px;
+
+            border-radius: 16px;
+        }
+
+
+        .auth-header h1 {
+            font-size: 25px;
+        }
+
+    }
+
+</style>
